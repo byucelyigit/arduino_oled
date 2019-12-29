@@ -4,7 +4,13 @@
             "name": "Win32",
             "includePath": [
                 "C:\\Users\\BURAK\\AppData\\Local\\Arduino15\\packages\\arduino\\tools\\**",
-                "C:\\Users\\BURAK\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.6.15\\**"
+                "C:\\Users\\BURAK\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.6.15\\**",
+                "C:\\Users\\BURAK\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.6.15\\libraries\\SPI\\**",
+                "F:\\OneDrive\\kisisel\\arduino\\libraries\\X113647Stepper-master\\**",
+                "F:\\OneDrive\\kisisel\\arduino\\libraries\\DS1302RTC\\**",
+                "F:\\OneDrive\\kisisel\\arduino\\libraries\\Adafruit-GFX-Library-master\\**",
+                "F:\\OneDrive\\kisisel\\arduino\\libraries\\DS1302RTC\\**",
+                "F:\\OneDrive\\kisisel\\arduino\\libraries\\Adafruit_SSD1306-master\\**"
             ],
             "forcedInclude": [
                 "C:\\Users\\BURAK\\AppData\\Local\\Arduino15\\packages\\arduino\\hardware\\avr\\1.6.15\\cores\\arduino\\Arduino.h"
