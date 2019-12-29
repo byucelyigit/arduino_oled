@@ -27,6 +27,9 @@ tardate::X113647Stepper myStepper(
 
 #define OLED_RESET 4
 const int button1Pin = 2;
+const int button2Pin = 3;
+const int button3Pin = 4;
+const int stopPin = 5;
 
 Adafruit_SSD1306 display(OLED_RESET);
 
@@ -64,9 +67,12 @@ void setup()   {
   Serial.begin(9600);
 
   pinMode(button1Pin, INPUT_PULLUP);
+  pinMode(button2Pin, INPUT_PULLUP);
+  pinMode(button3Pin, INPUT_PULLUP);
+  pinMode(stopPin, INPUT_PULLUP);
 
   // set the speed in rpm:
-  myStepper.setSpeed(16);
+  myStepper.setSpeed(120);
 
 
   // by default, we'll generate the high voltage from the 3.3v line internally! (neat!)
@@ -77,7 +83,7 @@ void setup()   {
   // Since the buffer is intialized with an Adafruit splashscreen
   // internally, this will display the splashscreen.
   display.display();
-  delay(2000);
+  //delay(2000);
 
   // Clear the buffer.
   display.clearDisplay();
@@ -107,33 +113,38 @@ void setup()   {
 
 
 void loop() {
-  display.setTextSize(1);
+  
+  display.setTextSize(2);
   display.setTextColor(WHITE);
   display.setCursor(15,0);
-  int buttonState = digitalRead(button1Pin);
+  display.clearDisplay();
 
-  Serial.println(buttonState);
-  // Show the state of pushbutton on serial monitor
-  // check if the pushbutton is pressed.
-  // if it is, the buttonState is HIGH:
-    display.clearDisplay();
-  if (buttonState == 1) {
-    // turn LED on:
-    display.setTextSize(1);
-    display.setTextColor(WHITE);
-    display.setCursor(15,0);
+  int buttonState1 = digitalRead(button1Pin);
+  int buttonState2 = digitalRead(button2Pin);
+  int buttonState3 = digitalRead(button3Pin);
+  int stopPinState = digitalRead(stopPin);
+
+  if (buttonState1 == 0) {
+    display.println("Pin 1 Pressed");
+    myStepper.step(1);
+  }
+
+  if (buttonState2 == 0) {
     display.println("Pin 2 Pressed");
+    myStepper.step(-1);
+  }
 
-    
-  } else {
-    // turn LED off:
-    display.setTextSize(1);
-    display.setTextColor(WHITE);
-    display.setCursor(15,0);
-    display.println("                 ");
-    myStepper.step(-32);
+  if (buttonState3 == 0) {
+    myStepper.step(-STEPS_PER_REVOLUTION);
+    display.println("-steps");    
+  }
 
-  }  
+  if (stopPinState == 0) {
+    display.println("Stop Pin");
+    myStepper.emergencyStop();
+    //myStepper.step(-STEPS_PER_REVOLUTION/4);
+  }
+
   display.display();
 
   // step one revolution in one direction:
