@@ -1,7 +1,7 @@
 /*
 -- Aşağıdaki kod Mega'ya yüklendiğinde düzgün bir şekilde grafik ve yazılar
 -- gösterildi. Ek olarak step motor da çalıştı.
-
+--
 
 */
 
